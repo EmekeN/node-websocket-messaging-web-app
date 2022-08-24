@@ -1,16 +1,16 @@
-const sqlite3 = require('sqlite3');
-const fs = require('fs');
+const sqlite3 = require("sqlite3");
+const fs = require("fs");
 
 class DataAccessObject {
   constructor(dbPath) {
     if (!fs.existsSync(dbPath)) {
-      fs.closeSync(fs.openSync(dbPath, 'w'));
+      fs.closeSync(fs.openSync(dbPath, "w"));
     }
-    this.db = new sqlite3.Database(dbPath, error => {
+    this.db = new sqlite3.Database(dbPath, (error) => {
       if (error) {
-        console.log('Could not connect to database', error);
+        console.log("Could not connect to database", error);
       } else {
-        console.log('Connected to database');
+        console.log("Connected to database");
       }
     });
   }
@@ -21,7 +21,7 @@ class DataAccessObject {
 
   run(sql, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.run(sql, params, function(error) {
+      this.db.run(sql, params, function (error) {
         if (error) {
           this.printError(sql, error);
           reject(error);
@@ -34,7 +34,7 @@ class DataAccessObject {
 
   get(sql, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.get(sql, params, function(error, result) {
+      this.db.get(sql, params, function (error, result) {
         if (error) {
           this.printError(sql, error);
           reject(error);
@@ -47,7 +47,7 @@ class DataAccessObject {
 
   all(sql, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.all(sql, params, function(error, rows) {
+      this.db.all(sql, params, function (error, rows) {
         if (error) {
           this.printError(sql, error);
           reject(error);

@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+:root {
+  --primary-clr: #ffe01b;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  background-color: var(--primary-clr);
+}
+
+body {
+  margin: 0;
+  font-family: Lato, sans-serif, serif, -apple-system, BlinkMacSystemFont;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: auto;
+  background-color: var(--primary-clr);
+  overflow-x: hidden;
+  color: #403b3b;
+}
+
+button,
+input,
+select,
+label {
+  cursor: pointer;
+}
+
+/* Hide Number Scroll Firefox */
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+
+input[type="radio"] {
+  -webkit-appearance: radio;
+}
+
+div,
+h1,
+h2,
+h3,
+p,
+span,
+input,
+select {
+  margin: 0;
+}
+
+section {
+  padding: 0 1rem;
+}
