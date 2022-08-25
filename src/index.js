@@ -4,5 +4,4 @@ import CommentFeed from "./CommentFeed";
 import "./styles/base.scss";
 
 const root = ReactDOM.createRoot(window.document.getElementById("CommentFeed"));
-console.log("rendering root");
 root.render(<CommentFeed />);

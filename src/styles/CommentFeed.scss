@@ -1,11 +1,10 @@
-$primary-color: white;
-
-$bg: black;
-
 #CommentFeed {
+  --comment-section-height: 20rem;
   background-color: var(--primary-clr);
+  display: grid;
+  place-items: center;
 }
 h1 {
-  color: $primary-color;
-  background-color: $bg;
+  color: var(--neutral-clr-01);
+  // background-color: $bg;
 }
