@@ -44,7 +44,7 @@ app.post("/createComment", async function (request, response) {
   comment.createComment(body).then((result) => {
     response.send(result);
     webSocketServer.clients.forEach((client) => {
-      client.send(JSON.stringify("time to update"));
+      client.send(JSON.stringify({ type: "newComment", id: result?.id }));
     });
   });
 });
@@ -61,7 +61,6 @@ app.get("/getComments", function (request, response) {
   comment.getComments().then((result) => {
     response.send(result);
   });
-  webSocketServer.emit("event", 123);
 });
 
 app.delete("/deleteComments", function (request, response) {

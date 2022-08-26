@@ -11,7 +11,9 @@ export const Api = {
       data.body = JSON.stringify(body);
     }
     const response = await fetch(url, data);
-    return await response.json();
+    let ans =await response.json())
+    console.log(ans)
+    return ans;
   },
 
   get(url) {

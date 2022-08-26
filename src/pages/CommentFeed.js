@@ -36,12 +36,7 @@ function CommentFeed(props) {
 
   useEffect(() => {
     try {
-      // Api.delete(Api.REST_SERVER_URL + Api.routes.deleteComments);
-      socketRef.current.addEventListener("open", (event) => {
-        console.log("Server connection open");
-        socketRef.current.send("Hello this is: " + clientIdRef.current);
-      });
-
+      Api.delete(Api.REST_SERVER_URL + Api.routes.deleteComments);
       Api.get(`${Api.REST_SERVER_URL + Api.routes.getComments}`)
         .then((res) => {
           console.log("got: ", res);
@@ -49,9 +44,23 @@ function CommentFeed(props) {
         })
         .catch((error) => console.log(error));
 
+      socketRef.current.addEventListener("open", (event) => {
+        console.log("Sersver connection open");
+        socketRef.current.send("Hello this is: " + clientIdRef.current);
+      });
+
       socketRef.current.addEventListener("message", (event) => {
         console?.log("Message from Server: ", event?.data);
-        // if(event.data === )
+        let data = JSON.parse(event?.data);
+        if (data?.type === "newComment") {
+          console?.log("Data is ", data);
+          Api.get(`${Api.REST_SERVER_URL + Api.routes.getComment}`, { id: data?.id })
+            .then((res) => {
+              console.log("got: ", res);
+              setCommentList((list) => list.unshift(res));
+            })
+            .catch((error) => console.log(error));
+        }
       });
     } catch (e) {
       console.log(e);

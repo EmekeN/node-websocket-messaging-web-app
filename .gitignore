@@ -43,3 +43,4 @@ node_modules/
 ehthumbs.db
 Thumbs.db
 
+database.sqlite3
