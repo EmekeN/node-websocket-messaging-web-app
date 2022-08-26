@@ -11,12 +11,12 @@ export const Api = {
       data.body = JSON.stringify(body);
     }
     const response = await fetch(url, data);
-    let ans =await response.json())
-    console.log(ans)
+    let ans = await response.json();
+    console.log(ans);
     return ans;
   },
 
-  get(url) {
+  get(url, body = {}) {
     return this.call(url, "get");
   },
 

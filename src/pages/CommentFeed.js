@@ -10,13 +10,15 @@ function CommentFeed(props) {
 
   //#region State
   const [commentList, setCommentList] = useState([]);
+  const [commentIds, setCommentIds] = useState([]);
+
   const {
     value: name,
     setValue: setName,
     bind: bindName,
     errorStatus: NameErrorStatus,
     setErrorStatus: setNameErrorStatus,
-  } = useInput("");
+  } = useInput("Pierra Oglidado");
 
   const {
     value: comment,
@@ -24,7 +26,9 @@ function CommentFeed(props) {
     bind: bindComment,
     errorStatus: CommentErrorStatus,
     setErrorStatus: setCommentErrorStatus,
-  } = useInput("");
+  } = useInput(
+    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, necessitatibus deleniti. Laboriosam quis reiciendis fugiat dolore assumenda quasi sequi obcaecati!"
+  );
 
   const [success, setSuccess] = useState(false);
 
@@ -36,11 +40,12 @@ function CommentFeed(props) {
 
   useEffect(() => {
     try {
-      Api.delete(Api.REST_SERVER_URL + Api.routes.deleteComments);
+      // Api.delete(Api.REST_SERVER_URL + Api.routes.deleteComments);
       Api.get(`${Api.REST_SERVER_URL + Api.routes.getComments}`)
-        .then((res) => {
-          console.log("got: ", res);
-          setCommentList(res);
+        .then((data) => {
+          console.log("Initial List: ", data);
+          setCommentList(data);
+          data.forEach((comment) => setCommentIds([...commentIds, comment]));
         })
         .catch((error) => console.log(error));
 
@@ -54,18 +59,22 @@ function CommentFeed(props) {
         let data = JSON.parse(event?.data);
         if (data?.type === "newComment") {
           console?.log("Data is ", data);
-          Api.get(`${Api.REST_SERVER_URL + Api.routes.getComment}`, { id: data?.id })
-            .then((res) => {
-              console.log("got: ", res);
-              setCommentList((list) => list.unshift(res));
-            })
-            .catch((error) => console.log(error));
+          setCommentIds([data.id, ...commentIds]);
         }
       });
     } catch (e) {
       console.log(e);
     }
   }, [socketRef, socketRef.current]);
+
+  useEffect(() => {
+    Api.get(`${Api.REST_SERVER_URL + Api.routes.getComments}`)
+      .then((data) => {
+        console.log("got: ", data);
+        setCommentList(data);
+      })
+      .catch((error) => console.log(error));
+  }, [commentIds]);
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
@@ -78,23 +87,8 @@ function CommentFeed(props) {
         name: name,
         message: comment,
       })
-        .then(
-          (res) => console.log("res of creation: ", res)
-          // setCommentList((list) =>
-          //   Api.get(`${Api.REST_SERVER_URL + Api.routes.getComment}`, { id: res?.id }).then(
-          //     (comment) => list.push(comment)
-          //   )
-          // )
-        )
+        .then((res) => console.log("res of creation: ", res))
         .catch((e) => console.log(e));
-
-      // Api.get(`${Api.REST_SERVER_URL + Api.routes.getComment}`).then((res) => {
-      //   console.log("Get results: ", res);
-      //   setCommentList(res);
-      // });
-      // const data = response.json();
-      // const data = await response.json();
-      // console.log("data: ", data);
     } catch (error) {
       console.log(error);
     }

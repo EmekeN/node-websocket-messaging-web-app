@@ -51,8 +51,11 @@ app.post("/createComment", async function (request, response) {
 
 app.get("/getComment", function (request, response) {
   const { body } = request;
+  console.log("body ", body);
   const { id } = body;
+  console.log("id: ", id);
   comment.getComment(id).then((result) => {
+    console.log("result: ", result);
     response.send(result);
   });
 });
