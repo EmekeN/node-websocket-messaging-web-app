@@ -1,10 +1,25 @@
-#CommentFeed {
+.CommentFeed {
   --comment-section-height: 20rem;
   background-color: var(--primary-clr);
   display: grid;
+  flex-direction: row;
+  flex-wrap: wrap;
   place-items: center;
-}
-h1 {
-  color: var(--neutral-clr-01);
-  // background-color: $bg;
+  padding: 0 1em;
+  h1 {
+    color: var(--neutral-clr-01);
+  }
+
+  .comment-list-ctn {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    justify-content: center;
+    // grid-template-rows: repeat(auto-fit, 8rem);
+    // grid-template-columns: repeat(auto-fit, minmax(14rem, 1.25fr));
+    gap: 1.5em;
+    padding: 1em 0.5em;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+  }
 }

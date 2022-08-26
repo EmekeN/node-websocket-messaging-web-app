@@ -24,6 +24,9 @@ yarn-error.log*
 
 
 .parcel-cache/*
+.parcel-cache
+.parcel-cache/
+.mdb
 .cache/
 coverage/
 dist/*

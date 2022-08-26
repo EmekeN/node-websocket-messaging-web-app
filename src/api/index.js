@@ -25,4 +25,13 @@ export const Api = {
   delete(url) {
     return this.call(url, "delete");
   },
+
+  routes: {
+    createComment: "/createComment",
+    getComment: "/getComment",
+    getComments: "/getComments",
+    deleteComments: "/deleteComments",
+  },
+  REST_SERVER_URL: "http://localhost:3001",
+  COMMENT_SOCKET_URL: "ws://localhost:3001",
 };

@@ -66,14 +66,7 @@ textarea,
 button {
   font-family: "Lato";
   font-size: 18px;
-}
-
-button {
-  letter-spacing: 0.01em;
-  font-weight: 700;
-}
-button:disabled {
-  background-color: var(--neutral-clr-03);
+  border: unset;
 }
 
 h1,
@@ -110,10 +103,19 @@ h5 {
   font-size: var(--font-05);
 }
 
+button {
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+button[disabled] {
+  background-color: var(--neutral-clr-03) !important;
+}
+
 small,
 .text_small {
   font-size: 0.75rem;
 }
+
 button,
 input,
 select,
